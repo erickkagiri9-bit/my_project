@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advanced Registration System</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    color:white;
+}
+
+body::before{
+    content:'';
+    position:fixed;
+    inset:0;
+    background:linear-gradient(
+    -45deg,
+    #ff006e,
+    #8338ec,
+    #3a86ff,
+    #06d6a0);
+    background-size:400% 400%;
+    animation:bgMove 12s ease infinite;
+}
+
+@keyframes bgMove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+.container{
+    position:relative;
+    z-index:10;
+    width:450px;
+    max-width:95%;
+    padding:40px;
+    border-radius:25px;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(20px);
+    box-shadow:0 10px 40px rgba(0,0,0,.3);
+}
+
+.logo{
+    text-align:center;
+    font-size:30px;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    text-align:center;
+    margin-bottom:30px;
+    opacity:.9;
+}
+
+.input-group{
+    position:relative;
+    margin-bottom:22px;
+}
+
+.input-group input{
+    width:100%;
+    padding:16px;
+    border:none;
+    outline:none;
+    border-radius:12px;
+    background:rgba(255,255,255,.2);
+    color:white;
+    font-size:15px;
+}
+
+.input-group label{
+    position:absolute;
+    left:16px;
+    top:16px;
+    transition:.3s;
+    pointer-events:none;
+}
+
+.input-group input:focus + label,
+.input-group input:valid + label{
+    top:-10px;
+    left:10px;
+    font-size:12px;
+    padding:0 5px;
+}
+
+.toggle{
+    position:absolute;
+    right:15px;
+    top:16px;
+    cursor:pointer;
+}
+
+.strength{
+    height:8px;
+    background:rgba(255,255,255,.2);
+    border-radius:10px;
+    overflow:hidden;
+    margin-bottom:20px;
+}
+
+#strengthBar{
+    height:100%;
+    width:0%;
+    transition:.4s;
+}
+
+button{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:12px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    color:#6d28d9;
+    background:white;
+}
+
+button:disabled{
+    opacity:.8;
+}
+
+.error{
+    color:#ffe5e5;
+    font-size:12px;
+    margin-top:5px;
+}
+
+.success-screen{
+    display:none;
+    text-align:center;
+}
+
+.success-icon{
+    width:100px;
+    height:100px;
+    margin:auto;
+    border-radius:50%;
+    background:#06d6a0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:50px;
+    margin-bottom:20px;
+}
+
+.spinner{
+    width:18px;
+    height:18px;
+    border:3px solid rgba(255,255,255,.3);
+    border-top:3px solid white;
+    border-radius:50%;
+    display:inline-block;
+    animation:spin .8s linear infinite;
+    vertical-align:middle;
+    margin-right:8px;
+}
+
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+@media(max-width:500px){
+    .container{
+        padding:25px;
+    }
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <div id="registrationSection">
+
+        <div class="logo">Create Account</div>
+
+        <div class="subtitle">
+            Join our platform today
+        </div>
+
+        <form id="registerForm">
+
+            <div class="input-group">
+                <input type="text" id="fullname" required>
+                <label>Full Name</label>
+            </div>
+
+            <div class="input-group">
+                <input type="email" id="email" required>
+                <label>Email Address</label>
+            </div>
+
+            <div class="input-group">
+                <input type="text" id="username" required>
+                <label>Username</label>
+            </div>
+
+            <div class="input-group">
+                <input type="password" id="password" required>
+                <label>Password</label>
+                <span class="toggle" onclick="togglePassword()">👁</span>
+            </div>
+
+            <div class="strength">
+                <div id="strengthBar"></div>
+            </div>
+
+            <div class="input-group">
+                <input type="password" id="confirmPassword" required>
+                <label>Confirm Password</label>
+            </div>
+
+            <div id="error" class="error"></div>
+
+            <button id="submitBtn" type="submit">
+                Create Account
+            </button>
+
+        </form>
+
+    </div>
+
+    <div id="successScreen" class="success-screen">
+
+        <div class="success-icon">✓</div>
+
+        <h2>Registration Successful</h2>
+
+        <br>
+
+        <p>
+            Your account has been created successfully.
+        </p>
+
+        <br>
+
+        <button onclick="location.reload()">
+            Create Another Account
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+const form = document.getElementById("registerForm");
+const password = document.getElementById("password");
+const confirmPassword = document.getElementById("confirmPassword");
+const strengthBar = document.getElementById("strengthBar");
+const errorBox = document.getElementById("error");
+
+function togglePassword(){
+
+    password.type =
+    password.type === "password"
+    ? "text"
+    : "password";
+}
+
+// Password Strength
+password.addEventListener("input",()=>{
+
+    let score = 0;
+    let value = password.value;
+
+    if(value.length >= 8) score++;
+    if(/[A-Z]/.test(value)) score++;
+    if(/[0-9]/.test(value)) score++;
+    if(/[^A-Za-z0-9]/.test(value)) score++;
+
+    strengthBar.style.width = (score * 25) + "%";
+
+    if(score <= 1){
+        strengthBar.style.background = "#ff4d4d";
+    }
+    else if(score <= 3){
+        strengthBar.style.background = "#ffd166";
+    }
+    else{
+        strengthBar.style.background = "#06d6a0";
+    }
+
+});
+
+form.addEventListener("submit",(e)=>{
+
+    e.preventDefault();
+
+    errorBox.textContent = "";
+
+    if(password.value !== confirmPassword.value){
+
+        errorBox.textContent =
+        "Passwords do not match.";
+
+        return;
+    }
+
+    const btn =
+    document.getElementById("submitBtn");
+
+    btn.disabled = true;
+
+    btn.innerHTML =
+    '<span class="spinner"></span>Creating Account...';
+
+    setTimeout(()=>{
+
+        document.getElementById(
+        "registrationSection"
+        ).style.display = "none";
+
+        document.getElementById(
+        "successScreen"
+        ).style.display = "block";
+
+    },2000);
+
+});
+
+</script>
+
+</body>
+</html>

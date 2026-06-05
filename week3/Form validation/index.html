@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Advanced Login System</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="background-animation"></div>
+
+    <div class="container">
+
+        <div class="login-card">
+
+            <h1>Welcome Back</h1>
+            <p class="subtitle">Secure Login System</p>
+
+            <form id="loginForm">
+
+                <!-- Email -->
+                <div class="input-box">
+                    <label>Email Address</label>
+
+                    <input
+                        type="text"
+                        id="email"
+                        placeholder="Enter your email"
+                    >
+
+                    <small class="error"></small>
+                </div>
+
+                <!-- Password -->
+                <div class="input-box">
+                    <label>Password</label>
+
+                    <div class="password-wrapper">
+
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Enter your password"
+                        >
+
+                        <span id="togglePassword">👁</span>
+
+                    </div>
+
+                    <!-- Strength -->
+                    <div class="strength-container">
+                        <div id="strengthBar"></div>
+                    </div>
+
+                    <small class="error"></small>
+                </div>
+
+                <!-- Remember -->
+                <div class="remember">
+                    <input type="checkbox" id="remember">
+                    <label for="remember">Remember Me</label>
+                </div>
+
+                <button type="submit">
+                    LOGIN
+                </button>
+
+                <p id="successMessage"></p>
+
+            </form>
+
+        </div>
+
+    </div>
+
+<script src="form.js"></script>
+</body>
+</html>

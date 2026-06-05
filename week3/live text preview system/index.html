@@ -1,0 +1,117 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>Live Text Preview</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- GOOGLE FONT -->
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+</head>
+
+<body>
+
+  <!-- BACKGROUND -->
+
+  <div class="background"></div>
+
+  <!-- MAIN CONTAINER -->
+
+  <div class="container">
+
+    <!-- INPUT CARD -->
+
+    <div class="editor-card">
+
+      <h1>
+        Live Text Preview
+      </h1>
+
+      <p class="subtitle">
+        Type anything and preview instantly
+      </p>
+
+      <!-- INPUT -->
+
+      <textarea
+        id="textInput"
+        placeholder="Start typing here..."
+      ></textarea>
+
+      <!-- CONTROLS -->
+
+      <div class="controls">
+
+        <button id="clearBtn">
+          Clear
+        </button>
+
+        <button id="copyBtn">
+          Copy Text
+        </button>
+
+      </div>
+
+      <!-- STATS -->
+
+      <div class="stats">
+
+        <div class="stat-box">
+
+          <span id="charCount">
+            0
+          </span>
+
+          <p>Characters</p>
+
+        </div>
+
+        <div class="stat-box">
+
+          <span id="wordCount">
+            0
+          </span>
+
+          <p>Words</p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- PREVIEW CARD -->
+
+    <div class="preview-card">
+
+      <h2>
+        Live Preview
+      </h2>
+
+      <div id="previewText">
+
+        Your live preview appears here...
+
+      </div>
+
+    </div>
+
+  </div>
+
+<script src="script.js"></script>
+</body>
+</html>
